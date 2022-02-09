@@ -129,7 +129,7 @@ public class MyLinkedList<E> implements MyReverseList<E>{
      */
     public void reverseRegion(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
         Node tempNode = new Node(null);
-        if(fromIndex >= this.size() || toIndex >= this.size() 
+        if(fromIndex > this.size() || toIndex > this.size() 
         || fromIndex < 0 || toIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
