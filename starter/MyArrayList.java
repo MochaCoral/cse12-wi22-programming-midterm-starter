@@ -1,13 +1,15 @@
 /**
- * TODO: Add your file header
- * Name:
- * ID:
- * Email:
+ * Name: Morales, Kyle
+ * ID: A16162998
+ * Email: kmmorale@ucsd.edu
  * File description: 
+ * Implementation of the reverseRegion interface method within a reduced array list class
  */
 
 /**
- * TODO: Add class header
+ * This class contains the methods and constructor for an array list, 
+ * as well as the node class and its respective methods, 
+ * implementing the MyReverseList<E> interface
  */
 public class MyArrayList<E> implements MyReverseList<E> {
     static final int DEFAULT_CAPACITY = 5;
@@ -32,12 +34,27 @@ public class MyArrayList<E> implements MyReverseList<E> {
     }
 
     /**
-	 * TODO: Method header comment here
-	 */
-    public void reverseRegion(int fromIndex, int toIndex){
-       /**
-        * TODO: Add your solution here
-        */
+     * method for reversing the order of elements in a list 
+     * from position fromIndex to position toIndex
+     * @param fromIndex starting position index
+     * @param toIndex terminating position index
+     */
+    public void reverseRegion(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
+       E from;
+        if(fromIndex >= this.size() || toIndex >= this.size() 
+        || fromIndex < 0 || toIndex < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        else if (fromIndex >= toIndex) {
+            return;
+        }
+        else {
+            for(int i = 0; i <= (toIndex - fromIndex) / 2; i++) {
+                from = this.get(i + fromIndex);
+                this.data[i + fromIndex] = this.get(toIndex - i);
+                this.data[toIndex - i] = from;
+            }
+        }
     }
 
     @Override

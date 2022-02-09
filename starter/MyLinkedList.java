@@ -1,13 +1,15 @@
 /**
- * TODO: Add your file header
- * Name:
- * ID:
- * Email:
- * File description: 
- */
+* Name: Morales, Kyle
+* ID: A16162998
+* Email: kmmorale@ucsd.edu
+* File description: 
+* Implementation of the reverseRegion interface method within a reduced linked list class
+*/
 
 /**
- * TODO: Add class header
+ * This class contains the methods and constructor for a linked list, 
+ * as well as the node class and its respective methods, 
+ * implementing the MyReverseList<E> interface
  */
 public class MyLinkedList<E> implements MyReverseList<E>{
 
@@ -120,12 +122,29 @@ public class MyLinkedList<E> implements MyReverseList<E>{
 
 
     /**
-     * TODO: Method header comment here
+     * method for reversing the order of elements in a list 
+     * from position fromIndex to position toIndex
+     * @param fromIndex starting position index
+     * @param toIndex terminating position index
      */
-    public void reverseRegion(int fromIndex, int toIndex){
-        //TODO: Add your solution here
+    public void reverseRegion(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
+        Node tempNode = new Node(null);
+        if(fromIndex >= this.size() || toIndex >= this.size() 
+        || fromIndex < 0 || toIndex < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        else if (fromIndex >= toIndex) {
+            return;
+        }
+        else {
+            for(int i = 0; i <= (toIndex - fromIndex) / 2; i++) {
+                tempNode.setElement(this.getNth(fromIndex + i).getElement());
+                this.getNth(fromIndex + i).setElement(this.getNth(toIndex - i).getElement());
+                this.getNth(toIndex - i).setElement(tempNode.getElement());
+            } 
+        }
     }
-
+    
     @Override
     /** 
      * Returns the number of elements stored

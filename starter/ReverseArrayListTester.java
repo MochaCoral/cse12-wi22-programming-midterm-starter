@@ -3,6 +3,7 @@
 */
 
 //other import statements
+import static org.junit.Assert.*;
 
 import org.junit.*;
 
@@ -11,13 +12,16 @@ import org.junit.*;
  * This class contains various test cases to test the reverseRegion method
  */
 public class ReverseArrayListTester {
-
+    public MyArrayList<String> listThreeElements;
+    public boolean exceptionThrown;
     /**
      * Run before every test
      */
     @Before
     public void setUp(){
-
+        String[] arr = {"gold", "silver", "crystal"};
+        exceptionThrown = false;
+        listThreeElements = new MyArrayList<String>(arr);
     }
 
 
@@ -27,7 +31,13 @@ public class ReverseArrayListTester {
      */
     @Test
     public void testReverseIndexOutOfBounds(){
-        //TODO: Add your test case
+        try{
+            listThreeElements.reverseRegion(2, 4);
+        }
+        catch (IndexOutOfBoundsException e) {
+            exceptionThrown = true;
+        }
+        assertTrue("Index out of bounds exception has been thrown", exceptionThrown);
     }
 
     /**
@@ -36,8 +46,13 @@ public class ReverseArrayListTester {
      */
     @Test
     public void testReverseFromIndexGreater(){
-        //TODO: Add your test case
-
+        listThreeElements.reverseRegion(2, 1);
+        assertEquals("Element one should remain unchanged", 
+            "gold", listThreeElements.get(0));
+        assertEquals("Element two should remain unchange", 
+            "silver", listThreeElements.get(1));
+        assertEquals("Element three should remain unchagned", 
+            "crystal", listThreeElements.get(2));
     }
 
     /**
@@ -46,18 +61,27 @@ public class ReverseArrayListTester {
     */
     @Test
     public void testReverseIndexWithinBounds(){
-
-        //TODO: Add your test case
+        listThreeElements.reverseRegion(0, 2);
+        assertEquals("Element one should have swapped with element three", 
+            "crystal", listThreeElements.get(0));
+        assertEquals("Element two should remain unchanged", 
+            "silver", listThreeElements.get(1));
+        assertEquals("Element three should have swapped with element one", 
+            "gold", listThreeElements.get(2));
     }
 
     /**
      * Custom test
     */
+    //test when fromIndex == toIndex
     @Test
     public void testReverseCustom(){
-        //TODO: Add your test case
-
+        listThreeElements.reverseRegion(1, 1);
+        assertEquals("Element one should remain unchanged", 
+            "gold", listThreeElements.get(0));
+        assertEquals("Element two should remain unchange", 
+            "silver", listThreeElements.get(1));
+        assertEquals("Element three should remain unchagned", 
+            "crystal", listThreeElements.get(2));    
     }
-
-
 }
